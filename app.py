@@ -13,7 +13,7 @@ def analyze_code(code):
         response = client.chat.completions.create(model="gpt-4",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": f"Check this Python code for errors: \n{code}"}
+            {"role": "user", "content": f"Check this code for errors: \n{code}"}
         ])
         return response.choices[0].message.content
     except Exception as e:
@@ -24,7 +24,7 @@ def optimize_code(code):
         response = client.chat.completions.create(model="gpt-4",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": f"Optimize this Python code for better efficiency and lower energy consumption: \n{code}"}
+            {"role": "user", "content": f"Optimize this code for better efficiency and lower energy consumption: \n{code}"}
         ])
         optimized_response = response.choices[0].message.content
         print("Optimized Response:", optimized_response)  # Temporary print statement
