@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from openai import OpenAI
 
-client = OpenAI(api_key='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')
+client = OpenAI(api_key='')
 from codecarbon import EmissionsTracker
 
 
@@ -27,8 +27,15 @@ def optimize_code(code):
             {"role": "user", "content": f"Optimize this code for better efficiency and lower energy consumption: \n{code}"}
         ])
         optimized_response = response.choices[0].message.content
-        print("Optimized Response:", optimized_response)  # Temporary print statement
         return optimized_response
+    except Exception as e:
+        return str(e)
+
+def execute_user_code(code):
+    # IMPORTANT: Implement a secure method to execute user code
+    # The following is a simplified example and should not be used in production
+    try:
+        exec(code)
     except Exception as e:
         return str(e)
 
@@ -36,27 +43,30 @@ def optimize_code(code):
 def index():
     if request.method == 'POST':
         user_code = request.form['code_input']
-        print("User Code:", user_code)
 
-        # Remove the error check and directly proceed to optimization
-        print("Optimizing code...")
-        optimized_code = optimize_code(user_code)
-        print("Optimized Code:", optimized_code)
-
-        # Hypothetical CO2 Emission Calculation (for demo purposes)
+        # Calculate CO2 Emissions for Original Code
         tracker = EmissionsTracker()
         tracker.start()
-        # Simulate processing of user's original code
+        execute_user_code(user_code)  # Execute user's original code
         emissions_original = tracker.stop()
 
+        # Optimize and execute the optimized code
+        optimized_code = optimize_code(user_code)
         tracker.start()
-        # Simulate processing of optimized code
+        execute_user_code(optimized_code)  # Execute optimized code
         emissions_optimized = tracker.stop()
 
-        return render_template('index.html', original_code=user_code, optimized_code=optimized_code, emissions_original=emissions_original, emissions_optimized=emissions_optimized)
+        # Format emissions data as a string in kg
+        emissions_original_str = "{:.11f} kg".format(emissions_original)
+        emissions_optimized_str = "{:.11f} kg".format(emissions_optimized)
+
+        return render_template('index.html', 
+                               original_code=user_code, 
+                               optimized_code=optimized_code, 
+                               emissions_original=emissions_original_str, 
+                               emissions_optimized=emissions_optimized_str)
 
     return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
-
