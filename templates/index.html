@@ -13,7 +13,9 @@
         <h3>Original Code:</h3>
         <pre>{{ original_code }}</pre>
         <h4>CO2 Emissions for Original Code:</h4>
-        <p>{{ emissions_optimized}}</p>
+        <p>{{ emissions_original }}</p>
+        <h4>Execution Time for Original Code:</h4>
+        <p>{{ execution_time_original }}</p>
     </div>
 
     {% if optimized_code %}
@@ -21,7 +23,23 @@
         <h3>Optimized Code:</h3>
         <pre>{{ optimized_code }}</pre>
         <h4>CO2 Emissions for Optimized Code:</h4>
-        <p>{{ emissions_original }}</p>
+        <p>{{ emissions_optimized }}</p>
+        <h4>Execution Time for Optimized Code:</h4>
+        <p>{{ execution_time_optimized }}</p>
+    </div>
+    {% endif %}
+
+    <div>
+        <h4>CO2 Emissions for GPT Optimization:</h4>
+        <p>{{ emissions_gpt_optimize }}</p>
+        <h4>Execution Time for GPT Optimization:</h4>
+        <p>{{ time_gpt_optimize }}</p>
+    </div>
+
+    {% if plot_html %}
+    <div>
+        <h3>Performance Metrics:</h3>
+        {{ plot_html | safe }}
     </div>
     {% endif %}
 
@@ -33,3 +51,4 @@
     {% endif %}
 </body>
 </html>
+
