@@ -6,7 +6,7 @@ import plotly.graph_objs as go
 import plotly.io as pio
 from plotly.subplots import make_subplots
 
-client = OpenAI(api_key='')
+client = OpenAI(api_key='sk-proj-Pek0tMmbfkgWIXalPhafT3BlbkFJx15TMfvYuU20sdXSnJKI')
 
 app = Flask(__name__)
 
