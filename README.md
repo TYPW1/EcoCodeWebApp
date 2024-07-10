@@ -4,7 +4,7 @@
 EcoCodeWebApp is a Flask-based web application that integrates with the OpenAI API to analyze and optimize Python code. It's designed to provide users with insights on their code's efficiency and suggest optimized versions for better performance and lower energy consumption. Additionally, the app estimates the CO2 emissions associated with running the original and optimized code.
 
 ## Features
-<img width="1042" alt="frontend screenshot" src="frontend.png">
+<img width="1042" alt="frontend screenshot" src="Frontend.png">
 - **Code Analysis and Optimization**: Users can submit Python code, which is then analyzed and optimized for efficiency.
 - **CO2 Emissions Estimation**: The app estimates the CO2 emissions for both the original and optimized code, aiding in understanding the environmental impact.
 - **Integration with OpenAI API**: Leverages the power of OpenAI's GPT-4 model for code analysis and optimization suggestions.
